@@ -19,6 +19,8 @@ void getConfigString(char *buf){
 		return 2;
 	}
 	if(ptr.flags & UCI_LOOKUP_COMPLETE) strcpy(buf, ptr.o->v.string);
+
+	printf("length:%d\n", strlen(ptr.o->v.string));
 	printf("%s\n", buf);
 
 	uci_free_context(c);

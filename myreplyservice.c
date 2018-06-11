@@ -6,7 +6,7 @@
 #include <netinet/in.h>
 #include <uci.h>
 
-void getConfigString(char *buf){
+char *getConfigString(){
 	char path[] = "myreplyservice.default.reply";
 //	char *buffer = malloc(80);
 	struct uci_ptr ptr;
@@ -18,19 +18,21 @@ void getConfigString(char *buf){
 		uci_free_context(c);
 		return 2;
 	}
-	if(ptr.flags & UCI_LOOKUP_COMPLETE) strcpy(buf, ptr.o->v.string);
+	char *buf = NULL;
+	if(ptr.flags & UCI_LOOKUP_COMPLETE){
+		buf = malloc(strlen(ptr.o->v.string)+1);
 
-	printf("length:%d\n", strlen(ptr.o->v.string));
-	printf("%s\n", buf);
+		strcpy(buf, ptr.o->v.string);
+		printf("%s\n", buf);
+	}
 
 	uci_free_context(c);
-
-
+	
+	return buf;
 }
 
 int main(int argc, char **argv){
-	char buffer[80];
-	getConfigString(buffer);
+	char *buffer = getConfigString();
 //char *buffer = "Hello World!\n";
 	struct sockaddr_in serv_addr;
 	int port = 5000;

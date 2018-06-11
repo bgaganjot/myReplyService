@@ -70,7 +70,7 @@ int main(int argc, char **argv){
 			return 4;
 		}
 	
-		send(client_sock, buffer, 1, 0);	
+		send(client_sock, buffer, strlen(buffer), 0);	
 
 	}
 

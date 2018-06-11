@@ -4,10 +4,10 @@
 #include <unistd.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-//#include <uci.h>
+#include <uci.h>
 
 void getConfigString(char *buf){
-/*	char path[] = "myreplyservice.default.reply";
+	char path[] = "myreplyservice.default.reply";
 //	char *buffer = malloc(80);
 	struct uci_ptr ptr;
 	struct uci_context *c = uci_alloc_context();
@@ -22,14 +22,14 @@ void getConfigString(char *buf){
 	printf("%s\n", buf);
 
 	uci_free_context(c);
-*/
+
 
 }
 
 int main(int argc, char **argv){
-//	char buffer[80];
-//	getConfigString(buffer);
-char *buffer = "Hello World!\n";
+	char buffer[80];
+	getConfigString(buffer);
+//char *buffer = "Hello World!\n";
 	struct sockaddr_in serv_addr;
 	int port = 5000;
 	int sockfd = socket(AF_INET, SOCK_STREAM, 0);

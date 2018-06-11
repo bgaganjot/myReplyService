@@ -34,8 +34,29 @@ char *getConfigString(){
 }
 
 int main(int argc, char **argv){
-	char *buffer = getConfigString();
-//char *buffer = "Hello World!\n";
+	char path[] = "myreplyservice.default.reply";
+	struct uci_ptr ptr;
+	struct uci_context *c = uci_alloc_context();
+
+	if(!c) return 5;
+
+	if((uci_lookup_ptr(c, &ptr, path, true) != UCI_OK) || (ptr.o == NULL || ptr.o->v.string==NULL)){
+		uci_free_context(c);
+		return 6;
+	}
+	if(!(ptr.flags & UCI_LOOKUP_COMPLETE)){
+		fprintf(stderr, "Config File could not be read properly\n");
+		return 7;
+	}
+	int len = strlen(ptr.o->v.string);
+	char buffer[len+1];
+
+	strncpy(buffer, ptr.o->v.string, len);
+	buffer[len] = '\0';
+//	printf("%s\n", buffer);
+
+	uci_free_context(c);
+
 	struct sockaddr_in serv_addr;
 	int port = 5000;
 	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -70,7 +91,7 @@ int main(int argc, char **argv){
 			return 4;
 		}
 	
-		send(client_sock, buffer, strlen(buffer), 0);	
+		send(client_sock, buffer, len, 0);	
 
 	}
 

@@ -20,9 +20,11 @@ char *getConfigString(){
 	}
 	char *buf = NULL;
 	if(ptr.flags & UCI_LOOKUP_COMPLETE){
-		buf = malloc(strlen(ptr.o->v.string)+1);
+		int len = strlen(ptr.o->v.string);
+		buf = malloc(len+1);
 
-		strcpy(buf, ptr.o->v.string);
+		strncpy(buf, ptr.o->v.string, len);
+		buf[len] = '\0';
 		printf("%s\n", buf);
 	}
 

@@ -40,7 +40,7 @@ int main(int argc, char **argv){
 	}
 	else if (strncmp(argv[1], "start", 5) == 0 || strncmp(argv[1], "stop", 4) == 0){
 		fprintf(stderr, "start or stop, %s", argv[1]);
-		return 12;
+//		return 12;
 	}
 	char path[] = "myreplyservice.default.reply";
 	struct uci_ptr ptr;

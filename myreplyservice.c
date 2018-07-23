@@ -36,11 +36,11 @@ char *getConfigString(){
 int main(int argc, char **argv){
 	if (argc != 2){
 		fprintf(stderr, "Need a start or stop arguement");
-		return 1;
+		return 11;
 	}
 	else if (strncmp(argv[1], "start", 5) == 0 || strncmp(argv[1], "stop", 4) == 0){
 		fprintf(stderr, "");
-		return 1;
+		return 12;
 	}
 	char path[] = "myreplyservice.default.reply";
 	struct uci_ptr ptr;

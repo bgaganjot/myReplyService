@@ -34,6 +34,14 @@ char *getConfigString(){
 }
 
 int main(int argc, char **argv){
+	if (argc != 2){
+		fprintf("Need a start or stop arguement");
+		return 1;
+	}
+	else if (strncmp(argv[1], "start", 5) == 0 || strncmp(argv[1], "stop", 4) == 0){
+		fprintf("");
+		return 1;
+	}
 	char path[] = "myreplyservice.default.reply";
 	struct uci_ptr ptr;
 	struct uci_context *c = uci_alloc_context();

@@ -35,11 +35,11 @@ char *getConfigString(){
 
 int main(int argc, char **argv){
 	if (argc != 2){
-		fprintf("Need a start or stop arguement");
+		fprintf(stderr, "Need a start or stop arguement");
 		return 1;
 	}
 	else if (strncmp(argv[1], "start", 5) == 0 || strncmp(argv[1], "stop", 4) == 0){
-		fprintf("");
+		fprintf(stderr, "");
 		return 1;
 	}
 	char path[] = "myreplyservice.default.reply";

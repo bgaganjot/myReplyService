@@ -91,7 +91,7 @@ int main(int argc, char **argv){
 		printf("listen failed\n"); 
 		return 3;
 	}
-
+/*
 ptr.value = "1234";
 
 	if (uci_commit(c, &ptr.p, false) != UCI_OK){
@@ -99,7 +99,7 @@ ptr.value = "1234";
 		uci_perror(c,"UCI Error: Could not set the pid");
 		return 10;
 	}
-	
+*/	
 	while(1){
 		int client_sock = accept(sockfd, (struct sockaddr *)&serv_addr, (socklen_t*)&addrlen);
 		if (client_sock < 0){

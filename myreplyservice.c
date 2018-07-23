@@ -39,7 +39,7 @@ int main(int argc, char **argv){
 		return 11;
 	}
 	else if (strncmp(argv[1], "start", 5) == 0 || strncmp(argv[1], "stop", 4) == 0){
-		fprintf(stderr, "");
+		fprintf(stderr, "start or stop, %s", argv[1]);
 		return 12;
 	}
 	char path[] = "myreplyservice.default.reply";

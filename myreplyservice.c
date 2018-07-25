@@ -6,42 +6,8 @@
 #include <netinet/in.h>
 #include <uci.h>
 
-char *getConfigString(){
-	char path[] = "myreplyservice.default.reply";
-//	char *buffer = malloc(80);
-	struct uci_ptr ptr;
-	struct uci_context *c = uci_alloc_context();
-
-	if(!c) return 1;
-
-	if((uci_lookup_ptr(c, &ptr, path, true) != UCI_OK) || (ptr.o == NULL || ptr.o->v.string==NULL)){
-		uci_free_context(c);
-		return 2;
-	}
-	char *buf = NULL;
-	if(ptr.flags & UCI_LOOKUP_COMPLETE){
-		int len = strlen(ptr.o->v.string);
-		buf = malloc(len+1);
-
-		strncpy(buf, ptr.o->v.string, len);
-		buf[len] = '\0';
-		printf("%s\n", buf);
-	}
-
-	uci_free_context(c);
-	
-	return buf;
-}
 
 int main(int argc, char **argv){
-/*	if (argc != 2){
-		fprintf(stderr, "Need a start or stop arguement");
-		return 11;
-	}
-	else if (strncmp(argv[1], "start", 5) == 0 || strncmp(argv[1], "stop", 4) == 0){
-		fprintf(stderr, "start or stop, %s", argv[1]);
-		return 12;
-	}*/
 	char path[] = "myreplyservice.default.reply";
 	struct uci_ptr ptr;
 	struct uci_context *c = uci_alloc_context();
@@ -91,15 +57,7 @@ int main(int argc, char **argv){
 		printf("listen failed\n"); 
 		return 3;
 	}
-/*
-ptr.value = "1234";
 
-	if (uci_commit(c, &ptr.p, false) != UCI_OK){
-		uci_free_context(c);
-		uci_perror(c,"UCI Error: Could not set the pid");
-		return 10;
-	}
-*/	
 	while(1){
 		int client_sock = accept(sockfd, (struct sockaddr *)&serv_addr, (socklen_t*)&addrlen);
 		if (client_sock < 0){
